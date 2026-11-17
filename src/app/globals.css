@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  /* One dark surface, one text color in three strengths, one accent. */
+  --color-ink: #090a09;
+  --color-panel: #101210;
+  --color-line: #222622;
+  --color-line-strong: #363b36;
+  --color-paper: #eef1ea;
+  --color-soft: #a9b0a5;
+  --color-quiet: #838b7f;
+  --color-signal: #4df58e;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fast at first, then easing into place. */
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-rise: rise 0.9s var(--ease-settle) both;
+}
+
+/* Only the start is written. The end is the element's own resting style. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+
+@layer base {
+  html {
+    /* The header is sticky, so an anchor link must stop short of it. */
+    scroll-padding-top: 5rem;
+  }
+
+  ::selection {
+    background: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+}
+
+/* The page's column: centered, capped in width, with room at the edges. */
+@utility shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* The small monospace label above a heading or beside a fact. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/*
+ * Headline type. Archivo is a variable font with a width axis, so
+ * font-stretch widens the letters themselves instead of spacing them out.
+ */
+@utility display {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+/*
+ * Fine grid lines that fade out toward the bottom. Two 1px gradients make
+ * the vertical and horizontal lines, and the mask does the fade, so there
+ * is no image to download.
+ */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black 30%, transparent);
+}
+
+/*
+ * A block that drifts up into place as it is scrolled to. The animation's
+ * clock is the block's position in the window, not time: it starts when the
+ * top edge enters at the bottom and ends 240px later. No JavaScript runs.
+ * A browser without scroll-driven animation, or a visitor who asked for
+ * less movement, skips the whole rule and sees the block in place.
+ */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0px entry 240px;
+    }
+  }
+}
