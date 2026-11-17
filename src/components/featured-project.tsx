@@ -1,5 +1,6 @@
 import { ArrowLink } from "@/components/arrow-link";
 import { HighlightList } from "@/components/highlight-list";
+import { MediaFrame } from "@/components/media-frame";
 import { ProjectMedia } from "@/components/project-media";
 import { ProjectTitle } from "@/components/project-title";
 import { TagList } from "@/components/tag-list";
@@ -20,17 +21,17 @@ export function FeaturedProject({ project }: FeaturedProjectProps) {
         )}
       </header>
 
-      <div className="reveal mt-10 border border-line bg-panel p-1.5 sm:p-3">
+      <MediaFrame className="unveil mt-10">
         <ProjectMedia
           media={project.media}
           sizes="(min-width: 80rem) 76rem, 100vw"
-          className="h-auto w-full"
+          className="zoom-out h-auto w-full"
         />
-      </div>
+      </MediaFrame>
 
       <div className="reveal mt-10 grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p className="text-lg leading-relaxed text-soft sm:text-xl sm:leading-relaxed">
+          <p className="text-lg leading-relaxed text-soft">
             {project.summary}
           </p>
           <div className="mt-8">

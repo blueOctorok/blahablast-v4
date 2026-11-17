@@ -21,7 +21,7 @@ export function FactList({ title, facts }: FactListProps) {
             key={fact.label}
             className="grid items-baseline gap-x-8 gap-y-1 border-b border-line py-4 sm:grid-cols-[2fr_3fr]"
           >
-            <dt className="font-semibold">{fact.label}</dt>
+            <dt className="font-medium">{fact.label}</dt>
             <dd className="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-soft">
               {fact.detail}
               {fact.link && (

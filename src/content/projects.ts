@@ -39,7 +39,7 @@ export const featuredProjects: Project[] = [
   {
     name: "Provven",
     kind: "Flagship",
-    role: "Co-founder and lead developer",
+    role: "Co-founder, lead developer and architect",
     summary:
       "Provven lets a truck driver build their resume, employment history and credentials once, as a Career Card they own, and reuse it for every job. It is built on Midnight, a privacy-first blockchain, and uses zero-knowledge proofs for selective disclosure: an employer can confirm a fact is true without seeing the document behind it.",
     highlights: [

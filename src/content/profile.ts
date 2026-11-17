@@ -7,7 +7,7 @@ export const profile = {
   name: "Sam Blaha",
   location: "Westlake, Ohio",
   pitch:
-    "I build products end to end: web apps, zero-knowledge credentials on Midnight, and a Flutter app that listens to your bass.",
+    "I build products end to end: web apps, zero-knowledge credentials on Midnight, and applications in Flutter.",
   email: "blahasam@gmail.com",
   github: "https://github.com/blueOctorok",
   /** Files in /public. Replacing a file under the same name updates the site. */
@@ -28,13 +28,13 @@ export const disciplines = [
   {
     name: "Flutter",
     detail:
-      "A Windows desktop app in Dart that scores what you play as you play it.",
+      "Application development in Dart, for mobile and desktop.",
   },
 ];
 
 export const bio = [
   "I'm a full-stack developer, and I have written software professionally since 2021. I work across the whole product: the interface, the API, the database and, since 2025, the chain underneath.",
-  "Today that means Provven, where I'm co-founder and lead developer, and Riffster, a practice app for bass and guitar that I'm building in Flutter.",
+  "Today that means Provven, where I'm co-founder, lead developer and the architect who designed it, and Riffster, a practice app for bass and guitar that I'm building in Flutter.",
   "Before software I worked in IT, and before that I served in the U.S. Navy.",
 ];
 
@@ -66,7 +66,7 @@ export const toolGroups = [
   },
   {
     name: "Flutter",
-    tools: ["Flutter", "Dart", "Windows desktop", "C++", "Real-time audio"],
+    tools: ["Flutter", "Dart", "iOS", "Android", "Windows"],
   },
 ];
 
@@ -100,5 +100,4 @@ export const background: Fact[] = [
     label: "U.S. Navy",
     detail: "Aviation ordnance, USS Ronald Reagan, 2007 to 2011",
   },
-  { label: "Languages", detail: "English and Italian" },
 ];

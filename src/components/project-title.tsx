@@ -1,8 +1,8 @@
 import type { Project } from "@/content/projects";
 
 const nameSizes = {
-  large: "text-5xl sm:text-8xl",
-  small: "text-3xl sm:text-5xl",
+  large: "text-4xl sm:text-5xl",
+  small: "text-3xl",
 };
 
 type ProjectTitleProps = {

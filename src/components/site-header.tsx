@@ -35,7 +35,9 @@ export function SiteHeader() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="transition-colors hover:text-signal"
+                // The underline is always there, squeezed to no width. On
+                // hover it grows back out from its left end.
+                className="relative py-1 transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-signal after:transition-transform after:duration-300 hover:text-paper hover:after:scale-x-100"
               >
                 {link.label}
               </a>
@@ -46,13 +48,20 @@ export function SiteHeader() {
               href={profile.resume}
               target="_blank"
               rel="noreferrer"
-              className="border border-line-strong px-2.5 py-2 text-paper transition-colors hover:border-signal hover:text-signal sm:px-3"
+              // A green panel waits below the button and slides up behind
+              // the word on hover. "isolate" keeps that panel, which sits
+              // behind the text, from slipping behind the header as well.
+              className="relative isolate block overflow-hidden border border-line-strong px-2.5 py-2 text-paper transition-colors duration-300 before:absolute before:inset-0 before:-z-10 before:translate-y-full before:bg-signal before:transition-transform before:duration-300 hover:border-signal hover:text-ink hover:before:translate-y-0 sm:px-3"
             >
               Resume
             </a>
           </li>
         </ul>
       </nav>
+      <div
+        aria-hidden
+        className="scroll-progress absolute inset-x-0 -bottom-px h-px bg-signal"
+      />
     </header>
   );
 }

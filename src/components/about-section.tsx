@@ -10,9 +10,12 @@ export function AboutSection() {
         <SectionHeading index="02" title="About" />
 
         <div className="mt-12 grid gap-12 lg:grid-cols-12">
-          <div className="reveal space-y-6 text-lg leading-relaxed text-soft sm:text-xl sm:leading-relaxed lg:col-span-6">
+          <div className="space-y-5 text-lg leading-relaxed text-soft lg:col-span-6">
             {bio.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph}>
+                {/* The fill needs text that wraps, so it goes on a span. */}
+                <span className="scroll-fill">{paragraph}</span>
+              </p>
             ))}
           </div>
 

@@ -13,19 +13,75 @@
 
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
   /* Fast at first, then easing into place. */
   --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
 
   --animate-rise: rise 0.9s var(--ease-settle) both;
+  --animate-letter: letter 0.9s var(--ease-settle) both;
+  --animate-breathe: breathe 9s ease-in-out infinite alternate;
+  --animate-ticker: ticker 60s linear infinite;
 }
 
-/* Only the start is written. The end is the element's own resting style. */
+/*
+ * Most keyframes below write only one end. The other end is the element's
+ * own resting style, so the same keyframes work on any element.
+ */
+
+/* Drifts up into place while coming into focus. */
 @keyframes rise {
   from {
     opacity: 0;
     translate: 0 24px;
+    filter: blur(8px);
+  }
+}
+
+/* One letter climbing up from below its line. */
+@keyframes letter {
+  from {
+    translate: 0 110%;
+  }
+}
+
+@keyframes breathe {
+  to {
+    scale: 1.25;
+    opacity: 0.55;
+  }
+}
+
+/* Half the track's width: see ToolTicker. */
+@keyframes ticker {
+  to {
+    translate: -50% 0;
+  }
+}
+
+@keyframes grow {
+  from {
+    scale: 0 1;
+  }
+}
+
+@keyframes unveil {
+  from {
+    opacity: 0.2;
+    clip-path: inset(8% 14%);
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    scale: 1.14;
+  }
+}
+
+@keyframes fill {
+  to {
+    background-size:
+      100% 100%,
+      100% 100%;
   }
 }
 
@@ -63,49 +119,213 @@
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/*
- * Headline type. Archivo is a variable font with a width axis, so
- * font-stretch widens the letters themselves instead of spacing them out.
- */
+/* Headlines. Same face as the body, a step heavier, never all caps. */
 @utility display {
-  font-family: var(--font-display);
-  font-stretch: 125%;
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 /*
- * Fine grid lines that fade out toward the bottom. Two 1px gradients make
- * the vertical and horizontal lines, and the mask does the fade, so there
- * is no image to download.
+ * Fine grid lines, drawn with two 1px gradients so there is no image to
+ * download. --grid-line recolors them.
  */
 @utility grid-lines {
   background-image:
-    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      var(--grid-line, var(--color-line)) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--grid-line, var(--color-line)) 1px,
+      transparent 1px
+    );
   background-size: 72px 72px;
+}
+
+/* Fades a layer out toward the bottom. */
+@utility fade-down {
   mask-image: linear-gradient(to bottom, black 30%, transparent);
 }
 
+/* Fades a layer out at its left and right ends. */
+@utility fade-edges {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
 /*
- * A block that drifts up into place as it is scrolled to. The animation's
- * clock is the block's position in the window, not time: it starts when the
- * top edge enters at the bottom and ends 240px later. No JavaScript runs.
- * A browser without scroll-driven animation, or a visitor who asked for
- * less movement, skips the whole rule and sees the block in place.
+ * The three utilities below read the mouse position that PointerArea writes
+ * to --pointer-x and --pointer-y. Each has a resting place for before the
+ * mouse arrives, and for phones, where it never does.
  */
+
+/* Shows a layer only in a circle around the mouse, smaller on a phone. */
+@utility pointer-mask {
+  mask-image: radial-gradient(
+    circle clamp(10rem, 40vw, 20rem) at var(--pointer-x, 80%)
+      var(--pointer-y, 6rem),
+    black,
+    transparent
+  );
+}
+
+/* A pool of green light under the mouse. */
+@utility spotlight {
+  background-image: radial-gradient(
+    circle 22rem at var(--pointer-x, 50%) var(--pointer-y, 50%),
+    var(--color-signal),
+    transparent
+  );
+}
+
+/*
+ * Trails after the mouse. The element sits at its box's top left and is
+ * moved by its own center, and the long transition is what makes it lag.
+ */
+@utility follow-pointer {
+  translate: calc(var(--pointer-x, 80vw) - 50%)
+    calc(var(--pointer-y, 6rem) - 50%);
+  transition: translate 1.4s var(--ease-settle);
+}
+
+/* A soft green cloud. */
+@utility aurora {
+  width: 34rem;
+  height: 34rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-signal) 14%, transparent);
+  filter: blur(100px);
+}
+
+/*
+ * Leans a card toward the mouse. The fractions run from -0.5 to 0.5, so
+ * 10deg here is 5 degrees each way, and a card with no mouse over it,
+ * where both fractions are 0, lies flat.
+ */
+@utility tilt {
+  @media (prefers-reduced-motion: no-preference) {
+    transform: perspective(1600px)
+      rotateX(calc(var(--pointer-fy, 0) * -10deg))
+      rotateY(calc(var(--pointer-fx, 0) * 10deg));
+    transition: transform 0.6s var(--ease-settle);
+  }
+}
+
+/* Text that turns green from left to right under the mouse. */
+@utility sweep {
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    var(--color-signal) 50%,
+    var(--color-paper) 50%
+  );
+  /* Twice the text's width: the green half waits off to the left. */
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-clip: text;
+  transition: background-position 0.7s var(--ease-settle);
+
+  &:hover,
+  &:focus-visible {
+    background-position: 0 0;
+  }
+}
+
+/*
+ * Everything below is driven by scrolling, not by time. The animation's
+ * clock is the element's position in the window, so it runs forward as the
+ * page scrolls down and backward as it scrolls up, with no JavaScript.
+ *
+ * Each rule sits inside a support check, so a browser without the feature,
+ * or a visitor who asked for less movement, sees the element in place.
+ * The 1ms duration is ignored, but Firefox will not run an animation
+ * without one.
+ */
+
+/* A block that drifts up and sharpens over its first 200px on screen. */
 @utility reveal {
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
-      animation: rise linear both;
+      animation: rise 1ms linear both;
       animation-timeline: view();
-      animation-range: entry 0px entry 240px;
+      animation-range: entry 0px entry 200px;
     }
+  }
+}
+
+/* A frame that opens out from its middle. */
+@utility unveil {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      /* Written out so the browser has a shape to animate toward. */
+      clip-path: inset(0);
+      animation: unveil 1ms linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+  }
+}
+
+/* A picture that starts zoomed in and pulls back. */
+@utility zoom-out {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: zoom-out 1ms linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+  }
+}
+
+/*
+ * Text that lights up word by word as it is read.
+ *
+ * The text itself is see-through and shows two backgrounds through its
+ * letters: a dim one at full width, and a bright one on top that grows
+ * from nothing. On text that wraps, a background runs along the lines as
+ * if they were one long line, so the bright one fills in reading order.
+ */
+@utility scroll-fill {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      color: transparent;
+      /* Dim, but still readable for someone who stops scrolling early. */
+      --unlit: color-mix(in srgb, var(--color-paper) 36%, var(--color-ink));
+      background-image:
+        linear-gradient(var(--color-paper), var(--color-paper)),
+        linear-gradient(var(--unlit), var(--unlit));
+      background-size:
+        0% 100%,
+        100% 100%;
+      background-repeat: no-repeat;
+      background-clip: text;
+      animation: fill 1ms linear both;
+      animation-timeline: view();
+      animation-range: cover 12% cover 45%;
+    }
+  }
+}
+
+/* The line under the header that fills as the page is scrolled. */
+@utility scroll-progress {
+  display: none;
+
+  @supports (animation-timeline: scroll()) {
+    display: block;
+    transform-origin: left;
+    animation: grow 1ms linear both;
+    animation-timeline: scroll(root);
   }
 }

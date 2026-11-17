@@ -10,7 +10,7 @@ export function TagList({ tags, label }: TagListProps) {
       {tags.map((tag) => (
         <li
           key={tag}
-          className="eyebrow border border-line-strong px-2.5 py-1.5 text-soft"
+          className="eyebrow border border-line-strong px-2.5 py-1.5 text-soft transition-colors duration-300 hover:border-signal hover:text-paper"
         >
           {tag}
         </li>

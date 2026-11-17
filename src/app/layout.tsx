@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { Archivo, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 
 import "./globals.css";
 
 // next/font downloads each font at build time and serves it from this site,
-// so a visitor's browser never asks Google for anything.
-const display = Archivo({
-  subsets: ["latin"],
-  // The width axis is what lets the headlines be set wider than normal.
-  axes: ["wdth"],
-  variable: "--font-archivo",
-});
-
+// so a visitor's browser never asks Google for anything. One family for
+// headlines and body keeps the page from looking like a poster.
 const sans = Geist({
   subsets: ["latin"],
   variable: "--font-geist",
@@ -33,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${mono.variable} motion-safe:scroll-smooth`}
+      className={`${sans.variable} ${mono.variable} motion-safe:scroll-smooth`}
     >
       <body className="bg-ink font-sans text-paper antialiased">
         {children}

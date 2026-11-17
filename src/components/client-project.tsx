@@ -1,5 +1,6 @@
 import { ArrowLink } from "@/components/arrow-link";
 import { HighlightList } from "@/components/highlight-list";
+import { MediaFrame } from "@/components/media-frame";
 import { ProjectMedia } from "@/components/project-media";
 import { ProjectTitle } from "@/components/project-title";
 import { TagList } from "@/components/tag-list";
@@ -13,14 +14,14 @@ type ClientProjectProps = {
 export function ClientProject({ project }: ClientProjectProps) {
   return (
     <article className="reveal grid gap-10 border-t border-line py-16 sm:py-20 lg:grid-cols-12 lg:gap-12">
-      <div className="self-start border border-line bg-panel p-1.5 lg:col-span-5">
+      <MediaFrame className="self-start lg:col-span-5">
         {/* The screenshot is tall, so only its top is shown. */}
         <ProjectMedia
           media={project.media}
           sizes="(min-width: 64rem) 32rem, 100vw"
           className="aspect-[16/10] w-full object-cover object-top"
         />
-      </div>
+      </MediaFrame>
 
       <div className="space-y-8 lg:col-span-7">
         <ProjectTitle project={project} size="small" />

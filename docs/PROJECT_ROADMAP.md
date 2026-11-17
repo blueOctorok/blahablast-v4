@@ -10,7 +10,10 @@ Sam Blaha's portfolio, version 4. One page: hero, selected work (Provven, Riffst
 
 - `src/app/page.tsx` only renders `HomePage`. `src/components/home-page.tsx` lists the sections in order.
 - `src/content/profile.ts` and `src/content/projects.ts` hold every word and link. A new project is a new object in `projects.ts`; no component changes.
-- `src/app/globals.css` holds the colors, fonts and the shared utilities: `shell` (page column), `eyebrow` (small mono label), `display` (headline type), `grid-lines`, `reveal` (scroll fade).
+- `src/app/globals.css` holds the colors, fonts and the shared utilities: `shell` (page column), `eyebrow` (small mono label), `display` (headline weight and spacing; the face is the body face), `grid-lines`, `reveal` (scroll fade).
+- Motion is almost all CSS, in `globals.css`. Two kinds:
+  - Scroll-driven: `reveal`, `unveil`, `zoom-out`, `scroll-fill`, `scroll-progress`. Each is inside `@supports` and a reduced-motion check. An ancestor between one of these and the page must use `overflow-clip`, never `overflow-hidden`, or the animation stops following the page.
+  - Mouse-driven: `pointer-mask`, `spotlight`, `follow-pointer`, `tilt`. They read CSS variables written by `src/components/pointer-area.tsx`, the only JavaScript in the motion.
 - `public/` holds `Resume.pdf`, `blockchain-cert.pdf` and `media/`. Replacing a file under the same name updates the site.
 - File names are kebab-case and components are named exports, the same as `riffster-site`.
 
@@ -25,10 +28,10 @@ npm run dev
 
 ## Next steps: GitHub and Vercel
 
-The site is built, checked locally and committed to a local git repo on `main`, with `origin` set to `https://github.com/blueOctorok/blahablast-v4.git`. That GitHub repo did not exist on 2026-11-17, so nothing is pushed. The old v3 site is still live on Netlify.
+The site is on `main` at `https://github.com/blueOctorok/blahablast-v4`. The old v3 site is still live on Netlify.
 
-1. Sam: create an empty public repo named `blahablast-v4` on GitHub (no README, no .gitignore).
-2. Agent: `git push -u origin main`.
+1. Done: the empty public repo `blahablast-v4` exists.
+2. Done: `main` is pushed.
 3. Sam: in Vercel, in the team that holds `riffster-site`, import `blahablast-v4`. No settings or environment variables are needed.
 4. Agent: check the Vercel URL at desktop and phone widths.
 5. Sam: add the domain to the Vercel project and switch its DNS records at the registrar. The agent needs the domain and registrar to write out the records.
