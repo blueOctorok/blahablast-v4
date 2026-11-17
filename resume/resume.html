@@ -1,0 +1,440 @@
+<!doctype html>
+<!--
+  Not the print source. public/Resume.pdf is a Provven resume, printed from
+  the resume-wallet repo:
+
+    npm run resume:sam
+
+  That command writes this site's public/Resume.pdf. The words still follow
+  src/content/profile.ts and src/content/projects.ts. This file keeps a
+  readable copy of the same resume. Do not print over the PDF from here.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sam Blaha — Resume</title>
+    <style>
+      @font-face {
+        font-family: Geist;
+        src: url("../node_modules/next/dist/next-devtools/server/font/geist-latin.woff2")
+          format("woff2");
+        font-weight: 100 900;
+        font-display: block;
+      }
+
+      @font-face {
+        font-family: "Geist Mono";
+        src: url("../node_modules/next/dist/next-devtools/server/font/geist-mono-latin.woff2")
+          format("woff2");
+        font-weight: 100 900;
+        font-display: block;
+      }
+
+      :root {
+        --ink: #121412;
+        --soft: #3c453b;
+        --quiet: #5e685c;
+        --line: #d7ddd4;
+        --signal: #0c7a40;
+        --paper: #f6f7f3;
+      }
+
+      @page {
+        size: letter;
+        margin: 0.42in 0.56in 0.36in;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: white;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Geist, ui-sans-serif, system-ui, sans-serif;
+        font-size: 9.25pt;
+        line-height: 1.32;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .sheet {
+        border-top: 3px solid var(--signal);
+        padding-top: 11px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 24px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 8pt;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--signal);
+      }
+
+      h1 {
+        margin: 2px 0 0;
+        font-size: 24pt;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .contact {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: right;
+        color: var(--soft);
+        font-size: 9pt;
+        line-height: 1.45;
+      }
+
+      .summary {
+        margin: 9px 0 0;
+        max-width: 68ch;
+        color: var(--soft);
+      }
+
+      section {
+        margin-top: 7px;
+      }
+
+      h2 {
+        margin: 0 0 6px;
+        padding-bottom: 3px;
+        border-bottom: 1px solid var(--line);
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 8pt;
+        font-weight: 400;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--quiet);
+      }
+
+      article {
+        margin-top: 4px;
+      }
+
+      article:first-of-type {
+        margin-top: 2px;
+      }
+
+      .role-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 10.5pt;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .when {
+        flex: none;
+        font-variant-numeric: tabular-nums;
+        color: var(--quiet);
+        font-size: 8.5pt;
+      }
+
+      .meta {
+        margin: 0;
+        color: var(--soft);
+      }
+
+      article ul {
+        margin: 2px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      article li {
+        position: relative;
+        margin: 1px 0 0;
+        padding-left: 11px;
+      }
+
+      /* Only job bullets. The contact list in the header is not a job list. */
+      article li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.48em;
+        width: 4px;
+        height: 4px;
+        background: var(--signal);
+      }
+
+      .skills {
+        margin: 0;
+      }
+
+      .skills div {
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 8px;
+        margin-top: 2px;
+      }
+
+      .skills dt {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 8pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--signal);
+      }
+
+      .skills dd {
+        margin: 0;
+      }
+
+      .background {
+        margin: 0;
+      }
+
+      .background div {
+        display: grid;
+        grid-template-columns: 168px 1fr;
+        gap: 10px;
+        margin-top: 2px;
+      }
+
+      .background dt {
+        font-weight: 600;
+      }
+
+      .background dd {
+        margin: 0;
+        color: var(--soft);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <header>
+        <div>
+          <p class="eyebrow">Software architect</p>
+          <h1>Sam Blaha</h1>
+        </div>
+        <ul class="contact">
+          <li>Westlake, Ohio</li>
+          <li><a href="mailto:blahasam@gmail.com">blahasam@gmail.com</a></li>
+          <li><a href="https://github.com/blueOctorok">github.com/blueOctorok</a></li>
+          <li><a href="https://blahablast.io">blahablast.io</a></li>
+        </ul>
+      </header>
+
+      <p class="summary">
+        I build products end to end: web apps, zero-knowledge credentials on
+        Midnight, and applications in Flutter. I have written software
+        professionally since 2021, across the interface, the API, the database
+        and, since 2025, the chain.
+      </p>
+
+      <section>
+        <h2>Experience</h2>
+
+        <article>
+          <div class="role-line">
+            <h3>Pace Drivers</h3>
+            <span class="when">Present</span>
+          </div>
+          <p class="meta">
+            Software architect · <a href="https://provven.com">provven.com</a>
+          </p>
+          <ul>
+            <li>
+              Provven is built for Pace Drivers. I am co-founder, lead developer
+              and the architect who designed it.
+            </li>
+            <li>
+              A truck driver builds a resume, employment history and credentials
+              once, as a Career Card they own, and reuses it for every job.
+              Zero-knowledge proofs on Midnight let an employer confirm a fact
+              without seeing the document behind it.
+            </li>
+            <li>
+              A Career Card is built from blocks, such as a resume, a CDL or a
+              DOT application, and is live from the first one. No wallets, seed
+              phrases or tokens.
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <div class="role-line">
+            <h3>Flux Point Studios</h3>
+            <span class="when">Feb 2025 – Present</span>
+          </div>
+          <p class="meta">Blockchain developer · Remote</p>
+          <ul>
+            <li>
+              Built ShardSwap, a peer-to-peer token marketplace on Cardano.
+              Traders swap assets directly between wallets, and holders of the
+              TALOS token unlock an AI analytics dashboard.
+            </li>
+            <li>
+              Wallet connection for Nami and Eternl through the CIP-30 standard.
+              Offers and swaps go through Maestro's Managed Contracts API. Next.js,
+              React and MeshJS.
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <div class="role-line">
+            <h3>MRI Software</h3>
+            <span class="when">Dec 2023 – Present</span>
+          </div>
+          <p class="meta">Full-stack developer, PHP and Laravel · Solon, Ohio</p>
+          <ul>
+            <li>
+              Worked on six core applications and their API endpoints, in
+              Laravel and Vue.
+            </li>
+            <li>
+              Administered the Linux servers and migrated them from Rackspace to
+              Azure with Ansible.
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <div class="role-line">
+            <h3>We Can Code IT</h3>
+            <span class="when">Apr 2023 – Dec 2023</span>
+          </div>
+          <p class="meta">Lead Java and JavaScript developer · Cleveland, Ohio</p>
+          <ul>
+            <li>
+              Built Java and JavaScript applications for the program, taught
+              React, and mentored students.
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <div class="role-line">
+            <h3>PNC Bank</h3>
+            <span class="when">Jan 2021 – Mar 2023</span>
+          </div>
+          <p class="meta">Software developer · Cleveland, Ohio</p>
+          <ul>
+            <li>
+              Automated hiring, onboarding and testing, including Playwright
+              tests in JavaScript.
+            </li>
+          </ul>
+        </article>
+
+        <article>
+          <div class="role-line">
+            <h3>Cleveland-Cliffs</h3>
+            <span class="when">Sep 2015 – May 2020</span>
+          </div>
+          <p class="meta">Support systems administrator · Cleveland, Ohio</p>
+          <ul>
+            <li>
+              IT work before software, including the systems used by the
+              C-suite, on Windows.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Also building</h2>
+        <article>
+          <div class="role-line">
+            <h3>Riffster</h3>
+            <span class="when">In development</span>
+          </div>
+          <p class="meta">
+            Designer and developer ·
+            <a href="https://riffster.xyz">riffster.xyz</a>
+          </p>
+          <ul>
+            <li>
+              A practice app for bass and guitar. A tab scrolls along a
+              fretboard into a playhead, and the app listens through a cable and
+              marks each note on time, early, late or missed.
+            </li>
+            <li>
+              A pluck and pitch detector written for the instrument's range. A
+              native C++ audio thread plays through the speakers while Dart
+              reads the pitch. Opens Guitar Pro files. No account and no
+              internet needed. Flutter, Dart, C++ and alphaTab.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <dl class="skills">
+          <div>
+            <dt>Web</dt>
+            <dd>
+              Next.js, React, TypeScript, Tailwind CSS, Supabase, PostgreSQL,
+              PHP / Laravel, REST APIs
+            </dd>
+          </div>
+          <div>
+            <dt>Blockchain</dt>
+            <dd>
+              Midnight, Compact, zero-knowledge proofs, Solidity, Cardano,
+              MeshJS, ERC-20 / ERC-721
+            </dd>
+          </div>
+          <div>
+            <dt>Flutter</dt>
+            <dd>Flutter, Dart, iOS, Android, Windows</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Background</h2>
+        <dl class="background">
+          <div>
+            <dt>Dapp University</dt>
+            <dd>Blockchain Developer Mentorship, graduated June 2025</dd>
+          </div>
+          <div>
+            <dt>We Can Code IT</dt>
+            <dd>Full-stack C# bootcamp, 2020</dd>
+          </div>
+          <div>
+            <dt>Cleveland State University</dt>
+            <dd>
+              Coursework in networking software and computer science, 2011–2013
+            </dd>
+          </div>
+          <div>
+            <dt>U.S. Navy</dt>
+            <dd>Aviation ordnance, USS Ronald Reagan, 2007–2011</dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+  </body>
+</html>

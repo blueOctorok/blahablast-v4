@@ -2,6 +2,32 @@
 
 Newest first.
 
+## 2026-11-17: Provven resume
+
+`public/Resume.pdf` is printed by Provven, from the resume-wallet repo (`npm run resume:sam`). Same words as the one-page file it replaced: Pace Drivers and Provven, Riffster, the three skill groups, and the same background. The QR opens blahablast.io. There are no proof marks. Nothing on the page is a verified credential.
+
+The file is not a Provven record. It is not shown on the Provven site. The head of the page is the name, with no Provven wordmark. blahablast.io is the public page.
+
+`resume/resume.html` is no longer the print source. Do not regenerate the PDF from it.
+
+## 2026-11-17: resume
+
+`public/Resume.pdf` is a new one-page file. The print source is `resume/resume.html`. It follows the portfolio: Pace Drivers and Provven, Riffster, ShardSwap under Flux Point, the same three skill groups, and the same background. The street address, phone number and Italian line are gone, because this file is public and the site does not show them.
+
+Dates for the older jobs are the ones from the previous resume. Pace Drivers says Present, with no start month, because none was on file. Flux Point Studios and MRI Software still say Present.
+
+Regenerate with Chrome, from the project folder:
+
+`chrome --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=public/Resume.pdf resume/resume.html`
+
+## 2026-11-17: Pace Drivers
+
+About now says Sam is a software architect at Pace Drivers, and that Provven is built for them. The co-founder, lead developer and architect line stays. Pace Drivers is the first row under Shipped software at, as Software architect.
+
+## 2026-11-17: domain is blahablast.io
+
+The Vercel deploy is live at `https://blahablast-v4.vercel.app`. DNS stays on Netlify's nameservers. Removing the domain from the Netlify site deleted the address records, so `blahablast.io` has no A record and `www` does not resolve. The zone is still there. Next is to add the domain in Vercel and put the records Vercel shows into that Netlify zone. Vercel's A address is per project.
+
 ## 2026-11-17: Provven role
 
 The Provven line now reads "Co-founder, lead developer and architect." The About paragraph says the same, and that he designed it.

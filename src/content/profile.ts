@@ -34,7 +34,7 @@ export const disciplines = [
 
 export const bio = [
   "I'm a full-stack developer, and I have written software professionally since 2021. I work across the whole product: the interface, the API, the database and, since 2025, the chain underneath.",
-  "Today that means Provven, where I'm co-founder, lead developer and the architect who designed it, and Riffster, a practice app for bass and guitar that I'm building in Flutter.",
+  "Today I'm a software architect at Pace Drivers. Provven, built for them, is where I'm co-founder, lead developer and the architect who designed it. I also build Riffster, a practice app for bass and guitar in Flutter.",
   "Before software I worked in IT, and before that I served in the U.S. Navy.",
 ];
 
@@ -79,6 +79,7 @@ export type Fact = {
 
 /** No dates on purpose: the resume carries them, and this list cannot go stale. */
 export const companies: Fact[] = [
+  { label: "Pace Drivers", detail: "Software architect" },
   { label: "Flux Point Studios", detail: "Blockchain developer" },
   { label: "MRI Software", detail: "Full-stack developer, PHP and Laravel" },
   { label: "We Can Code IT", detail: "Lead Java and JavaScript developer" },
